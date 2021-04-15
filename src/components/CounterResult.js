@@ -36,7 +36,14 @@ export default class CounterResult {
   }
 
   create() {
-    this._element = this._getTemplate();
+    this._element = this._createElement(this._getTemplate());
     return this._element;
+  }
+
+  _createElement(template) {
+    const container = document.createElement("div");
+    container.innerHTML = template;
+
+    return container.firstChild;
   }
 }
