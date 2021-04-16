@@ -1,8 +1,10 @@
 export default class CalculatorForm {
-  constructor({ onSubmit }) {
+  constructor({ onSubmit, onReset }) {
     this._formValues = {};
     this._onSubmit = onSubmit;
+    this._onReset = onReset;
 
+    this._handleReset = this._handleReset.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
     this._getInputValues = this._getInputValues.bind(this);
     this.setEventListeners = this.setEventListeners.bind(this);
@@ -163,6 +165,10 @@ export default class CalculatorForm {
     this._onSubmit(this._getInputValues());
   }
 
+  _handleReset() {
+    this._onReset();
+  }
+
   _getInputValues() {
     this._inputsList = [
       ...this._element.querySelectorAll(".counter__form input"),
@@ -181,6 +187,7 @@ export default class CalculatorForm {
   setEventListeners() {
     this._formElement = this._element.querySelector(".counter__form");
     this._formElement.addEventListener("submit", this._handleSubmit);
+    this._formElement.addEventListener("reset", this._handleReset);
   }
 
   createForm() {
