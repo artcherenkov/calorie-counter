@@ -7,6 +7,14 @@ import Section from "./components/Section";
 import CounterResult from "./components/CounterResult";
 import { calculateNorms } from "./utils/utils";
 import { containerSelector } from "./utils/constants";
+import FormValidator from "./components/FormValidator";
+
+const formSelector = ".counter__form";
+export const VALIDATION_CONFIG = {
+  inputSelector: ".input__wrapper input",
+  submitButtonSelector: ".form__submit-button",
+  resetButtonSelector: ".form__reset-button",
+};
 
 // Инициализация формы расчета калорий
 const onCalculatorFormSubmit = (formData) => {
@@ -26,6 +34,10 @@ const calculatorSection = new Section({
   containerSelector,
 });
 calculatorSection.render();
+
+// Инициализация валидатора формы
+const formValidator = new FormValidator(VALIDATION_CONFIG, formSelector);
+formValidator.enableValidation();
 
 // Инициализация секции результатов расчета
 const counterResult = new CounterResult();
